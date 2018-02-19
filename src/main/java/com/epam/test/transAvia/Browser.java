@@ -1,10 +1,11 @@
 package com.epam.test.transAvia;
 
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.remote.Augmenter;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -29,12 +30,14 @@ public class Browser {
     public static WebDriverWait webDriverWait_Medium;
     public static WebDriverWait webDriverWait_Small;
 
+    protected String pathToScreenshots = System.getProperty("user.dir") + File.separator + "target" + File.separator;
+
     @BeforeClass
     public static void createAndStartService() throws IOException {
         PathToChromeDriver = System.getenv("webdriver.chrome.driver");
 
         service = new ChromeDriverService.Builder()
-                .usingDriverExecutable(new File("/home/hkap/Downloads/1/chromedriver"))
+                .usingDriverExecutable(new File(PathToChromeDriver))
                 .usingPort(9515)
                 .build();
         service.start();
@@ -42,7 +45,6 @@ public class Browser {
 
     @BeforeClass
     public void startBrowser() throws InterruptedException {
-//        System.setProperty("webdriver.chrome.driver", "/home/hkap/Downloads/1/chromedriver");
 
         ChromeOptions options = new ChromeOptions();
         options.addArguments("disable-infobars");
@@ -60,15 +62,12 @@ public class Browser {
 
         driver = new RemoteWebDriver(service.getUrl(), capabilities);
 
+        driver.manage().timeouts().implicitlyWait(Integer.parseInt("30"), TimeUnit.SECONDS);
         webDriverWait_Big = new WebDriverWait(driver, 60, 500);
-
-//        Cookie name = new Cookie("websiteeu#lang", "en");
 
         driver.get("https://www.transavia.com/en-EU/home/");
 
-        Thread.sleep(15000);
-
-//        new WebDriverWait(ExpectedConditions.presenceOfElementLocated());
+        Thread.sleep(20000);
 
     }
 
@@ -94,6 +93,19 @@ public class Browser {
         } catch (NoSuchElementException e) {
             return false;
         }
+    }
+
+    public String captureScreen() {
+        String path;
+        try {
+            WebDriver augmentedDriver = new Augmenter().augment(driver);
+            File source = ((TakesScreenshot) augmentedDriver).getScreenshotAs(OutputType.FILE);
+            path = pathToScreenshots + source.getName();
+            FileUtils.copyFile(source, new File(path));
+        } catch (IOException e) {
+            path = "Failed to capture screenshot: " + e.getMessage();
+        }
+        return path;
     }
 
 }

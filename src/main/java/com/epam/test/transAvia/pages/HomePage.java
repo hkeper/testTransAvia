@@ -59,6 +59,7 @@ public class HomePage extends Browser{
             checkboxOff = true;
         }else {
             checkboxReturnOn.click();
+            checkboxOff = fieldReturnOn.getAttribute("placeholder").equals("Single flight");
         }
         return checkboxOff;
     }

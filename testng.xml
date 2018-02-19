@@ -9,7 +9,7 @@
 
     <test verbose="2" name="Test TransAvia" parallel="false">
         <classes>
-            <class name="com.epam.test.transAvia.Test"/>
+            <class name="com.epam.test.transAvia.TestBase"/>
         </classes>
     </test>
 
