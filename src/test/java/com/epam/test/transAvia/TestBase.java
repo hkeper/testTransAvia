@@ -15,6 +15,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import static org.testng.Assert.*;
 
@@ -28,9 +29,9 @@ public class TestBase extends Browser{
 
     Date date = new Date();
     String DATE_FORMAT = "dd MMM yyyy";
-    SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT);
+    SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);
     public String today =  sdf.format(date);
-    DateFormat logDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss.SSS");
+    DateFormat logDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss.SSS", Locale.ENGLISH);
     Date logDate;
     String StartTimeClass, EndTimeClass, StartTimeTest, EndTimeTest;
     public String indent;

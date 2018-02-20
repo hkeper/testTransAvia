@@ -1,0 +1,1 @@
+[0220/225336.610:ERROR:file_io_win.cc(179)] CreateFile C:\Users\hkepe\AppData\Local\Temp\scoped_dir13552_9927\Crashpad\settings.dat: Процесс не может получить доступ к файлу, так как этот файл занят другим процессом. (0x20)
