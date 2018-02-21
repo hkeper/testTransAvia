@@ -13,6 +13,10 @@ public class HomePage extends Browser{
 
     final WebDriver driver;
 
+    @FindBy(how= How.ID, id="desktop")
+    WebElement mainForm;
+    @FindBy(how= How.XPATH, xpath="//h1[contains(text(),'Where do you want to go?')]")
+    WebElement sectionTitle;
     @FindBy(how= How.ID, id="routeSelection_DepartureStation-input")
     WebElement fieldFrom;
     @FindBy(how=How.XPATH, xpath="//li/strong")
@@ -25,13 +29,28 @@ public class HomePage extends Browser{
     WebElement fieldReturnOn;
     @FindBy(how= How.XPATH, xpath="//div[./input[@id='dateSelection_IsReturnFlight']]")
     WebElement checkboxReturnOn;
+    @FindBy(how= How.ID, id="booking-passengers-input")
+    WebElement fieldPassengerBooking;
+    @FindBy(how= How.XPATH, xpath="//div[@class='selectfield adults']//button[@class='button button-secondary increase']")
+    WebElement buttonPlusAdults;
+    @FindBy(how= How.XPATH, xpath="//div[@class='selectfield children']//button[@class='button button-secondary increase']")
+    WebElement buttonPlusChildren;
+    @FindBy(how= How.XPATH, xpath="//div[@class='selectfield babies']//button[@class='button button-secondary increase']")
+    WebElement buttonPlusBabies;
+    @FindBy(how= How.XPATH, xpath="//div[@id='buttonContainer']/button")
+    WebElement buttonSavePassengers;
+    @FindBy(how= How.XPATH, xpath="//section[@class='component_search-panel']//div[@class='panel_section-button-container']/button")
+    WebElement buttonSearch;
+
 
     public HomePage(WebDriver driver){
         this.driver = driver;
     }
 
     public boolean isHomePageIsOpened(){
-        return isElementVisible(fieldFrom);
+        return isElementVisible(sectionTitle) && isElementVisible(fieldFrom) && isElementVisible(fieldTo) &&
+                isElementVisible(fieldDepartOn) && isElementVisible(fieldReturnOn) &&
+                isElementVisible(fieldPassengerBooking) ;
     }
 
     public void chooseFromPoint(String fromPoint) throws InterruptedException {
@@ -62,6 +81,39 @@ public class HomePage extends Browser{
             checkboxOff = fieldReturnOn.getAttribute("placeholder").equals("Single flight");
         }
         return checkboxOff;
+    }
+
+    public void chooseAdultsPassengers(Integer numberOfPassengers){
+        fieldPassengerBooking.click();
+        for(int i=1; i<numberOfPassengers; i++){
+            buttonPlusAdults.click();
+        }
+        buttonSavePassengers.click();
+        mainForm.click();
+    }
+
+    public void chooseChildrenPassengers(Integer numberOfPassengers){
+        fieldPassengerBooking.click();
+        for(int i=0; i<numberOfPassengers; i++){
+            buttonPlusChildren.click();
+        }
+        buttonSavePassengers.click();
+        mainForm.click();
+    }
+
+    public void chooseBabiesPassengers(Integer numberOfPassengers){
+        fieldPassengerBooking.click();
+        for(int i=0; i<numberOfPassengers; i++){
+            buttonPlusBabies.click();
+        }
+        buttonSavePassengers.click();
+        mainForm.click();
+    }
+
+    public void clickSearchButton(){
+        mainForm.click();
+        System.out.println(buttonSearch.getAttribute("class"));
+        buttonSearch.click();
     }
 
 }

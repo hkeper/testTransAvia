@@ -1,10 +1,12 @@
 package com.epam.test.transAvia;
 
 import com.epam.test.transAvia.pages.HomePage;
+import com.epam.test.transAvia.pages.SearchResultPage;
 import com.epam.test.transAvia.pages.WelcomePage;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
@@ -26,6 +28,7 @@ public class TestBase extends Browser{
 
     public WelcomePage welcomePage;
     public HomePage homePage;
+    public SearchResultPage searchResultPage;
 
     Date date = new Date();
     String DATE_FORMAT = "dd MMM yyyy";
@@ -41,6 +44,7 @@ public class TestBase extends Browser{
 
         welcomePage = PageFactory.initElements(driver, WelcomePage.class);
         homePage = PageFactory.initElements(driver, HomePage.class);
+        searchResultPage = PageFactory.initElements(driver, SearchResultPage.class);
 
         Calendar c = Calendar.getInstance();
         c.setTime(date);
@@ -48,6 +52,8 @@ public class TestBase extends Browser{
         String todayPlus1 = sdf.format(c.getTime());
 
         System.out.println(today);
+
+        webDriverWait_Big.until(ExpectedConditions.titleContains("Transavia"));
 
         if(welcomePage.isWelcomePageOpened()){
             welcomePage.clickOtherCountryLink();
@@ -58,6 +64,12 @@ public class TestBase extends Browser{
         homePage.chooseToPoint("Amsterdam");
         homePage.chooseDate(todayPlus1);
         assertTrue(homePage.unckeckReturnOn(), "Checkbox 'Return On' was not unchecked!");
+        homePage.chooseAdultsPassengers(1);
+        homePage.chooseChildrenPassengers(1);
+        homePage.chooseBabiesPassengers(1);
+        homePage.clickSearchButton();
+        assertTrue(searchResultPage.isSearchResultPageIsOpened(), "Search Result page was not opened!");
+        assertTrue(searchResultPage.isFlightFound(), "No one flight was found!");
 
         Thread.sleep(3000);
     }
@@ -66,6 +78,7 @@ public class TestBase extends Browser{
     public void start() {
         try {
 
+            startBrowser();
             indent = "";
             Capabilities caps = ((RemoteWebDriver) driver).getCapabilities();
             log("Browser version - " + caps.getVersion());
@@ -109,6 +122,7 @@ public class TestBase extends Browser{
 
     @AfterClass
     public void stop(){
+        stopBrowser();
         indent = "";
         logDate = new Date();
         EndTimeClass = logDateFormat.format(logDate);
