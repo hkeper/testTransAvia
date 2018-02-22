@@ -7,8 +7,16 @@
     <groupId>testEpam</groupId>
     <artifactId>transAviaTest</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <url>https://github.com/hkeper/testTransAvia</url>
 
-    <url>http://maven.apache.org</url>
+    <developers>
+        <developer>
+            <name>Michael Makeikin</name>
+            <email>hkeper1@gmail.com</email>
+            <organization/>
+            <organizationUrl>https://github.com/hkeper</organizationUrl>
+        </developer>
+    </developers>
 
     <properties>
         <selenium.version>2.53.0</selenium.version>
