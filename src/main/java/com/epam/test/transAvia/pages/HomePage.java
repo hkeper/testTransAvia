@@ -39,7 +39,7 @@ public class HomePage extends Browser{
     WebElement buttonPlusBabies;
     @FindBy(how= How.XPATH, xpath="//div[@id='buttonContainer']/button")
     WebElement buttonSavePassengers;
-    @FindBy(how= How.XPATH, xpath="//section[@class='component_search-panel']//div[@class='panel_section-button-container']/button")
+    @FindBy(how= How.XPATH, xpath="//div[./ul[@class='bulletless']]//button")
     WebElement buttonSearch;
 
 
@@ -111,8 +111,6 @@ public class HomePage extends Browser{
     }
 
     public void clickSearchButton(){
-        mainForm.click();
-        System.out.println(buttonSearch.getAttribute("class"));
         buttonSearch.click();
     }
 

@@ -15,11 +15,10 @@ import org.testng.annotations.BeforeMethod;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.fail;
 
 /**
  * Created by hkap on 2/8/18.
@@ -39,46 +38,16 @@ public class TestBase extends Browser{
     String StartTimeClass, EndTimeClass, StartTimeTest, EndTimeTest;
     public String indent;
 
-    @org.testng.annotations.Test
-    public void test() throws InterruptedException {
-
-        welcomePage = PageFactory.initElements(driver, WelcomePage.class);
-        homePage = PageFactory.initElements(driver, HomePage.class);
-        searchResultPage = PageFactory.initElements(driver, SearchResultPage.class);
-
-        Calendar c = Calendar.getInstance();
-        c.setTime(date);
-        c.add(Calendar.DATE, 1);  // number of days to add
-        String todayPlus1 = sdf.format(c.getTime());
-
-        System.out.println(today);
-
-        webDriverWait_Big.until(ExpectedConditions.titleContains("Transavia"));
-
-        if(welcomePage.isWelcomePageOpened()){
-            welcomePage.clickOtherCountryLink();
-        }
-
-        assertTrue(homePage.isHomePageIsOpened(), "Home page was not opened!");
-        homePage.chooseFromPoint("Paris");
-        homePage.chooseToPoint("Amsterdam");
-        homePage.chooseDate(todayPlus1);
-        assertTrue(homePage.unckeckReturnOn(), "Checkbox 'Return On' was not unchecked!");
-        homePage.chooseAdultsPassengers(1);
-        homePage.chooseChildrenPassengers(1);
-        homePage.chooseBabiesPassengers(1);
-        homePage.clickSearchButton();
-        assertTrue(searchResultPage.isSearchResultPageIsOpened(), "Search Result page was not opened!");
-        assertTrue(searchResultPage.isFlightFound(), "No one flight was found!");
-
-        Thread.sleep(3000);
-    }
-
     @BeforeClass
     public void start() {
         try {
 
             startBrowser();
+
+            welcomePage = PageFactory.initElements(driver, WelcomePage.class);
+            homePage = PageFactory.initElements(driver, HomePage.class);
+            searchResultPage = PageFactory.initElements(driver, SearchResultPage.class);
+
             indent = "";
             Capabilities caps = ((RemoteWebDriver) driver).getCapabilities();
             log("Browser version - " + caps.getVersion());
@@ -136,6 +105,17 @@ public class TestBase extends Browser{
     public
     void log(String text) {
         System.out.println(indent + text);
+    }
+
+    public void checkHomePageOpened() throws InterruptedException {
+
+        webDriverWait_Big.until(ExpectedConditions.titleContains("Transavia"));
+
+        if(welcomePage.isWelcomePageOpened()){
+            welcomePage.clickOtherCountryLink();
+        }
+
+        webDriverWait_Big.until(ExpectedConditions.titleContains("Transavia"));
     }
 
 }
