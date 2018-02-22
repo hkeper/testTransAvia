@@ -19,7 +19,7 @@ public class TestOneFlight extends TestBase{
 
         goToUrl(APP_LINK);
 
-        checkHomePageOpened();
+        checkPageOpened();
 
         assertTrue(homePage.isHomePageIsOpened(), "Home page was not opened!");
         homePage.chooseFromPoint("Paris");

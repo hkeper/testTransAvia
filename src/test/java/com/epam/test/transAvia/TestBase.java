@@ -107,7 +107,7 @@ public class TestBase extends Browser{
         System.out.println(indent + text);
     }
 
-    public void checkHomePageOpened() throws InterruptedException {
+    public void checkPageOpened() throws InterruptedException {
 
         webDriverWait_Big.until(ExpectedConditions.titleContains("Transavia"));
 

@@ -48,6 +48,7 @@ public class HomePage extends Browser{
     }
 
     public boolean isHomePageIsOpened(){
+
         return isElementVisible(sectionTitle) && isElementVisible(fieldFrom) && isElementVisible(fieldTo) &&
                 isElementVisible(fieldDepartOn) && isElementVisible(fieldReturnOn) &&
                 isElementVisible(fieldPassengerBooking) ;
