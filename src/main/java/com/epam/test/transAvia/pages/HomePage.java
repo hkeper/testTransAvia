@@ -27,7 +27,7 @@ public class HomePage extends Browser{
     WebElement fieldDepartOn;
     @FindBy(how= How.ID, id="dateSelection_IsReturnFlight-datepicker")
     WebElement fieldReturnOn;
-    @FindBy(how= How.XPATH, xpath="//div[./input[@id='dateSelection_IsReturnFlight']]")
+    @FindBy(how= How.XPATH, xpath="//div[./input[@id='dateSelection_IsReturnFlight']]/label")
     WebElement checkboxReturnOn;
     @FindBy(how= How.ID, id="booking-passengers-input")
     WebElement fieldPassengerBooking;
@@ -54,14 +54,14 @@ public class HomePage extends Browser{
                 isElementVisible(fieldPassengerBooking) ;
     }
 
-    public void chooseFromPoint(String fromPoint) throws InterruptedException {
+    public void chooseFromPoint(String fromPoint) {
         fieldFrom.click();
         fieldFrom.clear();
         fieldFrom.sendKeys(fromPoint);
         itemOfPointList.click();
     }
 
-    public void chooseToPoint(String fromPoint) throws InterruptedException {
+    public void chooseToPoint(String fromPoint) {
         fieldTo.click();
         fieldTo.clear();
         fieldTo.sendKeys(fromPoint);
@@ -90,7 +90,6 @@ public class HomePage extends Browser{
             buttonPlusAdults.click();
         }
         buttonSavePassengers.click();
-        mainForm.click();
     }
 
     public void chooseChildrenPassengers(Integer numberOfPassengers){
@@ -99,7 +98,6 @@ public class HomePage extends Browser{
             buttonPlusChildren.click();
         }
         buttonSavePassengers.click();
-        mainForm.click();
     }
 
     public void chooseBabiesPassengers(Integer numberOfPassengers){
@@ -108,7 +106,6 @@ public class HomePage extends Browser{
             buttonPlusBabies.click();
         }
         buttonSavePassengers.click();
-        mainForm.click();
     }
 
     public void clickSearchButton(){

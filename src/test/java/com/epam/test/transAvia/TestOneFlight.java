@@ -1,29 +1,26 @@
 package com.epam.test.transAvia;
 
-import java.util.Calendar;
-
 import static org.testng.Assert.assertTrue;
 
 /**
  * Created by hkap on 2/21/18.
+ * Test that at least one flight is found for chosen date and destination
  */
 public class TestOneFlight extends TestBase{
 
-    @org.testng.annotations.Test
-    public void test() throws InterruptedException {
+    String fromPoint = "Paris";
+    String toPoint = "Amsterdam";
 
-        Calendar c = Calendar.getInstance();
-        c.setTime(date);
-        c.add(Calendar.DATE, 1);  // number of days to add
-        String todayPlus1 = sdf.format(c.getTime());
+    @org.testng.annotations.Test
+    public void testFlightToOneDirection() throws InterruptedException {
 
         goToUrl(APP_LINK);
 
         checkPageOpened();
 
         assertTrue(homePage.isHomePageIsOpened(), "Home page was not opened!");
-        homePage.chooseFromPoint("Paris");
-        homePage.chooseToPoint("Amsterdam");
+        homePage.chooseFromPoint(fromPoint);
+        homePage.chooseToPoint(toPoint);
         homePage.chooseDate(todayPlus1);
         assertTrue(homePage.unckeckReturnOn(), "Checkbox 'Return On' was not unchecked!");
         homePage.clickSearchButton();

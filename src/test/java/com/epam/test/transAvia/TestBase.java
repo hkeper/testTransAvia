@@ -2,6 +2,7 @@ package com.epam.test.transAvia;
 
 import com.epam.test.transAvia.pages.HomePage;
 import com.epam.test.transAvia.pages.SearchResultPage;
+import com.epam.test.transAvia.pages.SelectOptionsPage;
 import com.epam.test.transAvia.pages.WelcomePage;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -15,6 +16,7 @@ import org.testng.annotations.BeforeMethod;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -28,6 +30,7 @@ public class TestBase extends Browser{
     public WelcomePage welcomePage;
     public HomePage homePage;
     public SearchResultPage searchResultPage;
+    public SelectOptionsPage selectOptionsPage;
 
     Date date = new Date();
     String DATE_FORMAT = "dd MMM yyyy";
@@ -37,16 +40,22 @@ public class TestBase extends Browser{
     Date logDate;
     String StartTimeClass, EndTimeClass, StartTimeTest, EndTimeTest;
     public String indent;
+    String todayPlus1;
 
     @BeforeClass
     public void start() {
         try {
+            Calendar c = Calendar.getInstance();
+            c.setTime(date);
+            c.add(Calendar.DATE, 1);  // number of days to add
+            todayPlus1 = sdf.format(c.getTime());
 
             startBrowser();
 
             welcomePage = PageFactory.initElements(driver, WelcomePage.class);
             homePage = PageFactory.initElements(driver, HomePage.class);
             searchResultPage = PageFactory.initElements(driver, SearchResultPage.class);
+            selectOptionsPage = PageFactory.initElements(driver, SelectOptionsPage.class);
 
             indent = "";
             Capabilities caps = ((RemoteWebDriver) driver).getCapabilities();
@@ -107,7 +116,7 @@ public class TestBase extends Browser{
         System.out.println(indent + text);
     }
 
-    public void checkPageOpened() throws InterruptedException {
+    public void checkPageOpened() {
 
         webDriverWait_Big.until(ExpectedConditions.titleContains("Transavia"));
 

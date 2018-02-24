@@ -16,8 +16,16 @@ public class SearchResultPage extends Browser {
 
     @FindBy(how= How.XPATH, xpath="//section[@class='flight outbound']")
     WebElement outboundFlight;
-    @FindBy(how= How.XPATH, xpath="//div[contains(@class, 'day day-with-availability')]")
+    @FindBy(how= How.XPATH, xpath="//div[contains(@class, 'panel flight-result active')]")
     WebElement availableDays;
+    @FindBy(how= How.XPATH, xpath="//div[contains(@class,'price')]")
+    WebElement priceOfTheFirstFlight;
+    @FindBy(how= How.XPATH, xpath="//button[.//div[@class='select']]")
+    WebElement buttonSelectOfTheFirstFlight;
+    @FindBy(how= How.CLASS_NAME, className="panel flight-result active selected")
+    WebElement selectedFlight;
+    @FindBy(how= How.NAME, className="next_button")
+    WebElement buttonNext;
 
     public SearchResultPage(WebDriver driver){
         this.driver = driver;
@@ -29,7 +37,22 @@ public class SearchResultPage extends Browser {
     }
 
     public Boolean isFlightInSevenDaysFound(){
-        return isElementVisible(availableDays);
+        return waitForElementVisibility_MediumTimeOut(availableDays);
     }
+
+    public Integer getPersonTicketCost(){
+        System.out.println(priceOfTheFirstFlight.getText().substring(2));
+        return Integer.parseInt(priceOfTheFirstFlight.getText().substring(2));
+    }
+
+    public Boolean clickButtonSelectOfTheFirstFlight(){
+        buttonSelectOfTheFirstFlight.click();
+        return waitForElementVisibility_SmallTimeOut(selectedFlight);
+    }
+
+    public void clickButtonNext(){
+        buttonNext.click();
+    }
+
 
 }
