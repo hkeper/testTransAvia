@@ -47,6 +47,10 @@ public class HomePage extends Browser{
     WebElement linkViewBooking;
     @FindBy(how= How.XPATH, xpath="//a[contains(@data-module,'ui/CombinationFlightHelper')]")
     WebElement linkAddMultDestination;
+    @FindBy(how= How.XPATH, xpath="//a[contains(@href, '/service/')]")
+    WebElement linkService;
+    @FindBy(how= How.XPATH, xpath="//a[contains(@href, '/hand-luggage/')]")
+    WebElement linkHandLuggage;
 
 
     public HomePage(WebDriver driver){
@@ -131,6 +135,14 @@ public class HomePage extends Browser{
 
     public void clickLinkAddMultDestination(){
         click(linkAddMultDestination);
+    }
+
+    public void clickServiceLink(){
+        click(linkService);
+    }
+
+    public void clickHandLuggageLink(){
+        click(linkHandLuggage);
     }
 
 }

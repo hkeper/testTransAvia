@@ -1,6 +1,6 @@
 package com.epam.test.transAvia;
 
-import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.*;
 
 /**
  * Created by hkap on 2/25/18.
@@ -16,6 +16,7 @@ public class TestMultipleDestination extends TestBase {
 
     @org.testng.annotations.Test
     public void testMultipleDestination() throws InterruptedException {
+        Integer totalAmount;
 
         goToUrl(APP_LINK);
 
@@ -35,7 +36,10 @@ public class TestMultipleDestination extends TestBase {
         assertTrue(searchResultPage.isFlightInSevenDaysFound(), "No one flight was found!");
         searchResultPage.clickButtonSelectOfTheOutboundFlight();
         searchResultPage.clickButtonSelectOfInboundFlight();
-        System.out.println("Total amount = " + selectOptionsPage.getTotalAmount());
+
+        totalAmount = selectOptionsPage.getTotalAmount();
+        System.out.println("Total amount = " + totalAmount);
+        assertFalse(totalAmount.equals(0), "Total amount is 0, but should not be!");
 
     }
 

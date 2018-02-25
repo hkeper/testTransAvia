@@ -69,7 +69,7 @@ public class SearchResultPage extends Browser {
     }
 
     public Boolean clickButtonSelectOfTheOutboundFlight(){
-        buttonSelectOfOutboundFlight.click();
+        click(buttonSelectOfOutboundFlight);
         return waitForElementVisibility_SmallTimeOut(selectedOutboundFlight);
     }
 
@@ -126,7 +126,8 @@ public class SearchResultPage extends Browser {
     }
 
     public Boolean clickButtonSelectOfInboundFlight(){
-        buttonSelectOfInboundFlight.click();
+        waitForElementVisibility_MediumTimeOut(buttonSelectOfInboundFlight);
+        click(buttonSelectOfInboundFlight);
         return waitForElementVisibility_SmallTimeOut(selectedInboundFlight);
     }
 

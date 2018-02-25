@@ -38,7 +38,9 @@ public class SelectOptionsPage extends Browser {
     }
 
     public Integer getTotalAmount(){
-        return Integer.parseInt(totalAmount.getText().substring(2,5));
+        String withoutCurrency = totalAmount.getText().substring(2);
+        String[] splitByDot = withoutCurrency.split("\\.");
+        return Integer.parseInt(splitByDot[0]);
     }
 
 }

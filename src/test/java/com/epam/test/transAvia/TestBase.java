@@ -29,6 +29,8 @@ public class TestBase extends Browser{
     public SearchResultPage searchResultPage;
     public SelectOptionsPage selectOptionsPage;
     public LoginPage loginPage;
+    public HandLuggagePage handLuggagePage;
+    public VideoPage videoPage;
 
     Date date = new Date();
     String DATE_FORMAT = "dd MMM yyyy";
@@ -55,6 +57,8 @@ public class TestBase extends Browser{
             searchResultPage = PageFactory.initElements(driver, SearchResultPage.class);
             selectOptionsPage = PageFactory.initElements(driver, SelectOptionsPage.class);
             loginPage = PageFactory.initElements(driver, LoginPage.class);
+            handLuggagePage = PageFactory.initElements(driver, HandLuggagePage.class);
+            videoPage = PageFactory.initElements(driver, VideoPage.class);
 
             indent = "";
             Capabilities caps = ((RemoteWebDriver) driver).getCapabilities();
