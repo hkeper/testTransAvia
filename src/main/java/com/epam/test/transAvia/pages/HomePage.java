@@ -13,8 +13,8 @@ public class HomePage extends Browser{
 
     final WebDriver driver;
 
-    @FindBy(how= How.ID, id="desktop")
-    WebElement mainForm;
+    @FindBy(how= How.ID, id="top")
+    WebElement mainContainer;
     @FindBy(how= How.XPATH, xpath="//h1[contains(text(),'Where do you want to go?')]")
     WebElement sectionTitle;
     @FindBy(how= How.ID, id="routeSelection_DepartureStation-input")
@@ -41,6 +41,8 @@ public class HomePage extends Browser{
     WebElement buttonSavePassengers;
     @FindBy(how= How.XPATH, xpath="//div[./ul[@class='bulletless']]//button")
     WebElement buttonSearch;
+    @FindBy(how= How.XPATH, xpath="//a[contains(@href, 'booking-overview')]")
+    WebElement linkManageBooking;
 
 
     public HomePage(WebDriver driver){
@@ -78,7 +80,7 @@ public class HomePage extends Browser{
         if(fieldReturnOn.getAttribute("placeholder").equals("Single flight")){
             checkboxOff = true;
         }else {
-            checkboxReturnOn.click();
+            click(checkboxReturnOn);
             checkboxOff = fieldReturnOn.getAttribute("placeholder").equals("Single flight");
         }
         return checkboxOff;
@@ -90,6 +92,7 @@ public class HomePage extends Browser{
             buttonPlusAdults.click();
         }
         buttonSavePassengers.click();
+        mainContainer.click();
     }
 
     public void chooseChildrenPassengers(Integer numberOfPassengers){
@@ -98,6 +101,7 @@ public class HomePage extends Browser{
             buttonPlusChildren.click();
         }
         buttonSavePassengers.click();
+        mainContainer.click();
     }
 
     public void chooseBabiesPassengers(Integer numberOfPassengers){
@@ -106,10 +110,15 @@ public class HomePage extends Browser{
             buttonPlusBabies.click();
         }
         buttonSavePassengers.click();
+        mainContainer.click();
     }
 
     public void clickSearchButton(){
-        buttonSearch.click();
+        click(buttonSearch);
+    }
+
+    public void clickManageYourBookingLink(){
+        click(linkManageBooking);
     }
 
 }

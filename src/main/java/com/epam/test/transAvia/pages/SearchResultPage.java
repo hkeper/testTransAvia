@@ -22,9 +22,9 @@ public class SearchResultPage extends Browser {
     WebElement priceOfTheFirstFlight;
     @FindBy(how= How.XPATH, xpath="//button[.//div[@class='select']]")
     WebElement buttonSelectOfTheFirstFlight;
-    @FindBy(how= How.CLASS_NAME, className="panel flight-result active selected")
+    @FindBy(how= How.XPATH, xpath="//div[contains(@class, 'active selected')]")
     WebElement selectedFlight;
-    @FindBy(how= How.NAME, className="next_button")
+    @FindBy(how= How.NAME, name="next_button")
     WebElement buttonNext;
 
     public SearchResultPage(WebDriver driver){
@@ -41,17 +41,16 @@ public class SearchResultPage extends Browser {
     }
 
     public Integer getPersonTicketCost(){
-        System.out.println(priceOfTheFirstFlight.getText().substring(2));
         return Integer.parseInt(priceOfTheFirstFlight.getText().substring(2));
     }
 
-    public Boolean clickButtonSelectOfTheFirstFlight(){
+    public Boolean clickButtonSelectOfTheFirstFlight() throws InterruptedException {
         buttonSelectOfTheFirstFlight.click();
         return waitForElementVisibility_SmallTimeOut(selectedFlight);
     }
 
     public void clickButtonNext(){
-        buttonNext.click();
+        click(buttonNext);
     }
 
 

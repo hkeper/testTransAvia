@@ -16,11 +16,11 @@ public class SelectOptionsPage extends Browser {
 
     @FindBy(how= How.ID, id="top")
     WebElement mainContainer;
-    @FindBy(how= How.XPATH, xpath="//td//button[@value='B']")
+    @FindBy(how= How.XPATH, xpath="//th[@data-product-class='B']")
     WebElement buttonSelectPlus;
     @FindBy(how= How.XPATH, xpath="//*[contains(@class,'selected-column-2')]")
     WebElement plusSelected;
-    @FindBy(how= How.CLASS_NAME, xpath="back")
+    @FindBy(how= How.CLASS_NAME, className="back")
     WebElement totalAmount;
 
     public SelectOptionsPage(WebDriver driver){
@@ -38,8 +38,7 @@ public class SelectOptionsPage extends Browser {
     }
 
     public Integer getTotalAmount(){
-        System.out.println(totalAmount.getText().substring(2));
-        return Integer.parseInt(totalAmount.getText().substring(2));
+        return Integer.parseInt(totalAmount.getText().substring(2,5));
     }
 
 }

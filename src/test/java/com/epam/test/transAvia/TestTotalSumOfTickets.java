@@ -13,7 +13,7 @@ public class TestTotalSumOfTickets extends TestBase{
     String toPoint = "Paris";
 
     @Test
-    public void testTotalSum(){
+    public void testTotalSum() throws InterruptedException {
         Integer actualSum = 0;
         Integer expectedSum = 0;
         Integer ticketCost = 0;
@@ -26,9 +26,9 @@ public class TestTotalSumOfTickets extends TestBase{
         homePage.chooseFromPoint(fromPoint);
         homePage.chooseToPoint(toPoint);
         homePage.chooseDate(todayPlus1);
+        assertTrue(homePage.unckeckReturnOn(), "Checkbox 'Return On' was not unchecked!");
         homePage.chooseAdultsPassengers(2);
         homePage.chooseChildrenPassengers(1);
-        assertTrue(homePage.unckeckReturnOn(), "Checkbox 'Return On' was not unchecked!");
         homePage.clickSearchButton();
         assertTrue(searchResultPage.isSearchResultPageIsOpened(), "Search Result page was not opened!");
         assertTrue(searchResultPage.isFlightInSevenDaysFound(), "No one flight was found!");
@@ -43,8 +43,8 @@ public class TestTotalSumOfTickets extends TestBase{
         assertTrue(selectOptionsPage.clickSelectPlusButton(), "Plus was not selected!");
 
         actualSum = selectOptionsPage.getTotalAmount();
-
-        assertTrue(actualSum == expectedSum, "Expected total amount is not equal to Actual total amount!");
+        System.out.println("Actual Price = " + actualSum);
+        assertTrue(actualSum.equals(expectedSum), "Expected total amount is not equal to Actual total amount!");
 
     }
 
