@@ -26,6 +26,8 @@ public class SearchResultPage extends Browser {
     WebElement selectedFlight;
     @FindBy(how= How.NAME, name="next_button")
     WebElement buttonNext;
+    @FindBy(how= How.XPATH, xpath="//div[contains(@class,'notification-error')]/p")
+    WebElement errorMessage;
 
     public SearchResultPage(WebDriver driver){
         this.driver = driver;
@@ -53,5 +55,8 @@ public class SearchResultPage extends Browser {
         click(buttonNext);
     }
 
+    public String getErrorMessage(){
+        return errorMessage.getText();
+    }
 
 }

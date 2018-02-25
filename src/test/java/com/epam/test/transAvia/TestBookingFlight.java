@@ -14,7 +14,7 @@ public class TestBookingFlight extends TestBase{
     String flightDate = "9 June 2016";
 
     @Test
-    public void testBookingFlightFound(){
+    public void testBookingFlightFound() throws InterruptedException {
         goToUrl(APP_LINK);
 
         checkPageOpened();
@@ -27,8 +27,8 @@ public class TestBookingFlight extends TestBase{
         loginPage.setBookingNumber(bookingNumber);
         loginPage.setLastName(name);
         loginPage.setFlightDate(flightDate);
+        Thread.sleep(3000);
         loginPage.clickButtonViewBooking();
-
     }
 
 }

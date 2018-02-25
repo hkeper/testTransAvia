@@ -22,7 +22,7 @@ public class LoginPage extends Browser {
     WebElement fieldLastName;
     @FindBy(how= How.ID, id="retrieveBookingByLastname_FlightDate-datepicker")
     WebElement fieldFlightDate;
-    @FindBy(how= How.XPATH, xpath="//div[@class='fields']//button")
+    @FindBy(how= How.XPATH, xpath="//button[contains(text(),'View booking')]")
     WebElement buttonViewBooking;
 
 
@@ -51,6 +51,8 @@ public class LoginPage extends Browser {
     }
 
     public void clickButtonViewBooking(){
+        click(fieldBookingNumber);
+        isElementVisible(buttonViewBooking);
         click(buttonViewBooking);
     }
 

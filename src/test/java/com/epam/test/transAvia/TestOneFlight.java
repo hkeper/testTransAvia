@@ -27,7 +27,6 @@ public class TestOneFlight extends TestBase{
         assertTrue(searchResultPage.isSearchResultPageIsOpened(), "Search Result page was not opened!");
         assertTrue(searchResultPage.isFlightInSevenDaysFound(), "No one flight was found!");
 
-        Thread.sleep(3000);
     }
 
 }
