@@ -36,7 +36,7 @@ public class TestTotalSumOfTickets extends TestBase{
         ticketCost = searchResultPage.getPersonTicketCost();
         expectedSum = (3 * ticketCost) + 36 * 3;
         System.out.println("Expected Price = " + expectedSum);
-        assertTrue(searchResultPage.clickButtonSelectOfTheFirstFlight(), "Flight was not selected!");
+        assertTrue(searchResultPage.clickButtonSelectOfTheOutboundFlight(), "Flight was not selected!");
         searchResultPage.clickButtonNext();
 
         assertTrue(selectOptionsPage.isSelectOptionsPageIsOpened(), "Select Options page was not opened!");
