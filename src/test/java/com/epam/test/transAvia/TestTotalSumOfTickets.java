@@ -13,7 +13,7 @@ public class TestTotalSumOfTickets extends TestBase{
     String toPoint = "Paris";
 
     @Test
-    public void testTotalSum() throws InterruptedException {
+    public void testTotalSum() {
         Integer actualSum = 0;
         Integer expectedSum = 0;
         Integer ticketCost = 0;

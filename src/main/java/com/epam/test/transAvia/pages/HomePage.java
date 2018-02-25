@@ -43,6 +43,8 @@ public class HomePage extends Browser{
     WebElement buttonSearch;
     @FindBy(how= How.XPATH, xpath="//a[contains(@href, 'booking-overview')]")
     WebElement linkManageBooking;
+    @FindBy(how= How.XPATH, xpath="//a[contains(@href, 'booking-overview')]/div")
+    WebElement linkViewBooking;
 
 
     public HomePage(WebDriver driver){
@@ -119,6 +121,10 @@ public class HomePage extends Browser{
 
     public void clickManageYourBookingLink(){
         click(linkManageBooking);
+    }
+
+    public void clickViewYourBookingLink(){
+        click(linkViewBooking);
     }
 
 }

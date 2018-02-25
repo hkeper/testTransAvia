@@ -44,7 +44,7 @@ public class SearchResultPage extends Browser {
         return Integer.parseInt(priceOfTheFirstFlight.getText().substring(2));
     }
 
-    public Boolean clickButtonSelectOfTheFirstFlight() throws InterruptedException {
+    public Boolean clickButtonSelectOfTheFirstFlight(){
         buttonSelectOfTheFirstFlight.click();
         return waitForElementVisibility_SmallTimeOut(selectedFlight);
     }

@@ -1,9 +1,6 @@
 package com.epam.test.transAvia;
 
-import com.epam.test.transAvia.pages.HomePage;
-import com.epam.test.transAvia.pages.SearchResultPage;
-import com.epam.test.transAvia.pages.SelectOptionsPage;
-import com.epam.test.transAvia.pages.WelcomePage;
+import com.epam.test.transAvia.pages.*;
 import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -31,6 +28,7 @@ public class TestBase extends Browser{
     public HomePage homePage;
     public SearchResultPage searchResultPage;
     public SelectOptionsPage selectOptionsPage;
+    public LoginPage loginPage;
 
     Date date = new Date();
     String DATE_FORMAT = "dd MMM yyyy";
@@ -56,6 +54,7 @@ public class TestBase extends Browser{
             homePage = PageFactory.initElements(driver, HomePage.class);
             searchResultPage = PageFactory.initElements(driver, SearchResultPage.class);
             selectOptionsPage = PageFactory.initElements(driver, SelectOptionsPage.class);
+            loginPage = PageFactory.initElements(driver, LoginPage.class);
 
             indent = "";
             Capabilities caps = ((RemoteWebDriver) driver).getCapabilities();
