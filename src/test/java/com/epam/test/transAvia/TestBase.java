@@ -35,7 +35,6 @@ public class TestBase extends Browser{
     Date date = new Date();
     String DATE_FORMAT = "dd MMM yyyy";
     SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);
-    public String today =  sdf.format(date);
     DateFormat logDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss.SSS", Locale.ENGLISH);
     Date logDate;
     String StartTimeClass, EndTimeClass, StartTimeTest, EndTimeTest;

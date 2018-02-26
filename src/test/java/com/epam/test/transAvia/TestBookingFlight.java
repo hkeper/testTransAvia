@@ -3,6 +3,7 @@ package com.epam.test.transAvia;
 import org.testng.annotations.Test;
 
 import static org.testng.Assert.assertTrue;
+import static org.testng.Assert.fail;
 
 /**
  * Created by hkap on 2/25/18.
@@ -15,20 +16,27 @@ public class TestBookingFlight extends TestBase{
 
     @Test
     public void testBookingFlightFound() throws InterruptedException {
-        goToUrl(APP_LINK);
+        log("***** Start testing of functionality - " + this.getClass().getMethods()[0] + " *****");
+        try {
+            goToUrl(APP_LINK);
 
-        checkPageOpened();
+            checkPageOpened();
 
-        assertTrue(homePage.isHomePageIsOpened(), "Home page was not opened!");
-        homePage.clickManageYourBookingLink();
-        homePage.clickViewYourBookingLink();
+            assertTrue(homePage.isHomePageIsOpened(), "Home page was not opened!");
+            homePage.clickManageYourBookingLink();
+            homePage.clickViewYourBookingLink();
 
-        assertTrue(loginPage.isLoginPageIsOpened(), "Login page was not opened!");
-        loginPage.setBookingNumber(bookingNumber);
-        loginPage.setLastName(name);
-        loginPage.setFlightDate(flightDate);
-        Thread.sleep(3000);
-        loginPage.clickButtonViewBooking();
+            assertTrue(loginPage.isLoginPageIsOpened(), "Login page was not opened!");
+            loginPage.setBookingNumber(bookingNumber);
+            loginPage.setLastName(name);
+            loginPage.setFlightDate(flightDate);
+            loginPage.clickButtonViewBooking();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail();
+        }
+        log("Test TestBookingFlight finished successfully.");
     }
 
 }
