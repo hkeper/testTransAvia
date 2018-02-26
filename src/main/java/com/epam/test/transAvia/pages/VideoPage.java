@@ -31,10 +31,12 @@ public class VideoPage extends Browser {
     }
 
     public String getVideoName(){
+        waitForElementVisibility_MediumTimeOut(videoName);
         return videoName.getText();
     }
 
     public String getVideoAuthor(){
+        waitForElementVisibility_MediumTimeOut(videoAuthor);
         return videoAuthor.getText();
     }
 

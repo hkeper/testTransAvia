@@ -6,10 +6,9 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.firefox.FirefoxBinary;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.Augmenter;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Wait;
@@ -40,9 +39,7 @@ public class Browser {
 
     @BeforeSuite
     public static void createAndStartService() throws IOException {
-//        PathToChromeDriver = System.getenv("webdriver.chrome.driver");
-
-        PathToChromeDriver = "/home/hkap/Downloads/1/chromedriver";
+        PathToChromeDriver = System.getenv("webdriver.chrome.driver");
 
         service = new ChromeDriverService.Builder()
                 .usingDriverExecutable(new File(PathToChromeDriver))
@@ -64,20 +61,10 @@ public class Browser {
         options.addArguments("chromeHeadlessProtection");
 //        options.addArguments("headless");
 
-//        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
-//        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
-//
-//        driver = new RemoteWebDriver(service.getUrl(), capabilities);
+        DesiredCapabilities capabilities = DesiredCapabilities.chrome();
+        capabilities.setCapability(ChromeOptions.CAPABILITY, options);
 
-        FirefoxBinary binary = new FirefoxBinary(new File("/home/hkap/Install/firefox452esr/firefox"));
-        FirefoxProfile profile = new FirefoxProfile();
-        //Set Location to store files after downloading.
-        profile.setPreference("browser.download.folderList", 2);
-        profile.setPreference("browser.helperApps.neverAsk.saveToDisk", "application/octet-stream,text/csv,application/vnd.ms-excel");
-        profile.setPreference("browser.download.manager.showWhenStarting", false);
-        profile.setPreference("pdfjs.disabled", true);
-
-        driver = new FirefoxDriver(binary, profile);
+        driver = new RemoteWebDriver(service.getUrl(), capabilities);
 
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Integer.parseInt(ConfigProperties.getProperty("common.implicitWait.timeOut.sec")), TimeUnit.SECONDS);

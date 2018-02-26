@@ -10,6 +10,11 @@
     <test name="Test TransAvia" parallel="false">
         <classes>
             <class name="com.epam.test.transAvia.TestOneFlight"/>
+            <class name="com.epam.test.transAvia.TestBookingFlight"/>
+            <class name="com.epam.test.transAvia.TestMultipleDestination"/>
+            <class name="com.epam.test.transAvia.TestMultipleDestination"/>
+            <class name="com.epam.test.transAvia.TestTotalSumOfTickets"/>
+            <class name="com.epam.test.transAvia.TestVideoLink"/>
         </classes>
     </test>
 

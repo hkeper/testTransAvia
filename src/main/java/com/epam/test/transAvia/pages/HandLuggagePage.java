@@ -16,7 +16,7 @@ public class HandLuggagePage extends Browser {
 
     @FindBy(how= How.ID, id="top")
     WebElement mainContainer;
-    @FindBy(how= How.XPATH, xpath="//iframe")
+    @FindBy(how= How.XPATH, xpath="//div[@class='content-text-color']/iframe")
     WebElement videoFrame;
 
     public HandLuggagePage(WebDriver driver){
@@ -29,6 +29,7 @@ public class HandLuggagePage extends Browser {
     }
 
     public String getVideoLink(){
+        waitForElementVisibility_SmallTimeOut(videoFrame);
         return videoFrame.getAttribute("src");
     }
 
